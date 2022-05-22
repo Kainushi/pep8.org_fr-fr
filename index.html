@@ -239,111 +239,111 @@ ul > li {
 
 
 
-<h1 id="code-lay-out">Code Layout</h1>
+<h1 id="code-lay-out">Disposition du Code</h1>
 
 
 <h2 id="indentation">Indentation</h2>
 
 
-<p>Use 4 spaces per indentation level.</p>
+<p>Utilisez 4 espaces par niveau d'indentation.</p>
 
-<p>Continuation lines should align wrapped elements either vertically using Python’s implicit line joining inside parentheses, brackets and braces, or using a <em>hanging indent</em> <a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. When using a hanging indent the following should be considered; there should be no arguments on the first line and further indentation should be used to clearly distinguish itself as a continuation line.</p>
+<p>Les continuations de lignes doivent aligner les éléments remis à la ligne soit verticalement en utilisant le jointement implicide de Python à l'intérieur des parenthèses, crochets et accolades ou en utilisant une <em>indentation flottante</em> <a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. Quand vous utilisez une indentation flottante, prennez en considération qu'il ne doit pas y avoir d'arguments sur la première ligne et une indentation supplémentaire doit être faite pour clairement les distinguer comme une continuation de ligne.</p>
 
-<p class="yes"><span>Yes:</span></p>
+<p class="yes"><span>Oui:</span></p>
 
-<pre><code class="language-python"># Aligned with opening delimiter.
+<pre><code class="language-python"># Aligné avec le délimiteur d'ouverture.
 foo = long_function_name(var_one, var_two,
                          var_three, var_four)
 
-# Add 4 spaces (an extra level of indentation) to distinguish arguments from the rest.
+# Ajout de 4 espaces (un niveau d'indentation supplémentaire) pour distinguer les arguments du reste.
 def long_function_name(
         var_one, var_two, var_three,
         var_four):
     print(var_one)
 
-# Hanging indents should add a level.
+# Les indentations flottantes doivent ajouter un niveau..
 foo = long_function_name(
     var_one, var_two,
     var_three, var_four)</code></pre>
 
-<p class="no"><span>No:</span></p>
+<p class="no"><span>Non:</span></p>
 
-<pre><code class="language-python"># Arguments on first line forbidden when not using vertical alignment.
+<pre><code class="language-python"># Les arguments sur la première ligne sont interdits quand l'alignement vertical est pas utilisé.
 foo = long_function_name(var_one, var_two,
     var_three, var_four)
 
-# Further indentation required as indentation is not distinguishable.
+# Plus d'indentation est requise pour ne pas se méler au contenu de la fonction.
 def long_function_name(
     var_one, var_two, var_three,
     var_four):
     print(var_one)</code></pre>
 
-<p>The 4-space rule is optional for continuation lines.</p>
+<p>La régle des 4 espaces est optionelle pour les lignes de continuation.</p>
 
-<p>Optional:</p>
+<p>Optionel:</p>
 
-<pre><code class="language-python"># Hanging indents *may* be indented to other than 4 spaces.
+<pre><code class="language-python"># Les indentations flottantes *peuvent* etre indentées par plus ou moins de 4 espaces.
 foo = long_function_name(
   var_one, var_two,
   var_three, var_four)</code></pre>
 
 <a id="if-statements"></a>
-<p>When the conditional part of an <code>if</code>-statement is long enough to require that it be written across multiple lines, it’s worth noting that the combination of a two character keyword (i.e. <code>if</code>), plus a single space, plus an opening parenthesis creates a natural 4-space indent for the subsequent lines of the multiline conditional. This can produce a visual conflict with the indented suite of code nested inside the <code>if</code>-statement, which would also naturally be indented to 4 spaces. This PEP takes no explicit position on how (or whether) to further visually distinguish such conditional lines from the nested suite inside the <code>if</code>-statement. Acceptable options in this situation include, but are not limited to:</p>
+<p>Quand la partie conditionelle d'une instruction <code>if</code> est assez longue pour avoir besoind d'être écrite sur plusieurs lignes, il est bon de noter que la combinaison d'un mot clé à deux caractères (c.-⁠à-⁠d. <code>if</code>), plus un espace, plus une parenthèse ouvrante créer un espace de 4 caractères pour les lignes suivantes dans le cas d'une condition multi-ligne. Cela peut produire un conflit visuel avec la suite de code au sein de l'instruction <code>if</code>. Des options acceptable peuvent être :</p>
 
-<pre><code class="language-python"># No extra indentation.
-if (this_is_one_thing and
-    that_is_another_thing):
-    do_something()
+<pre><code class="language-python"># Pas d'indentation supplémentaire.
+if (cette_chose_la and
+    cette_autre_chose_ci):
+    fais_un_truc()
 
-# Add a comment, which will provide some distinction in editors
-# supporting syntax highlighting.
-if (this_is_one_thing and
-    that_is_another_thing):
-    # Since both conditions are true, we can frobnicate.
-    do_something()
+# Ajouter un commentaire, ce qui apportera une séparation visible dans les éditeurs
+# supportant la colorisation syntaxique.
+if (cette_chose_la and
+    cette_autre_chose_ci):
+    # Si les deux conditions sont vraies, on lance le bidullage.
+    fais_un_truc()
 
-# Add some extra indentation on the conditional continuation line.
-if (this_is_one_thing
-        and that_is_another_thing):
-    do_something()</code></pre>
+# Ajouter une indentation sur la ligne de continuation de la condition.
+if (cette_chose_la
+        and cette_autre_chose_ci):
+    fais_un_truc()</code></pre>
 
-<p>(Also see the discussion of whether to break before or after binary operators below.)</p>
+<p>(Voir aussi la discution sur la cesure avant ou après un operateur binaire ci-dessous)</p>
 
-<p>The closing brace/bracket/parenthesis on multiline constructs may either line up under the first non-whitespace character of the last line of list, as in:</p>
+<p>La parenthèse/crochet/accolade fermente dans une construction multi-ligne peut être sous le premier caractère non blanc de la ligne precedente comme:</p>
 
-<pre><code class="language-python">my_list = [
+<pre><code class="language-python">ma_liste = [
     1, 2, 3,
     4, 5, 6,
     ]
-result = some_function_that_takes_arguments(
+resultat = une_fonction_qui_prends_des_arguments(
     &#39;a&#39;, &#39;b&#39;, &#39;c&#39;,
     &#39;d&#39;, &#39;e&#39;, &#39;f&#39;,
     )</code></pre>
-<p>or it may be lined up under the first character of the line that starts the multiline construct, as in:</p>
-<pre><code class="language-python">my_list = [
+<p>ou elle peut être aligné sous le premier caractère qui démarre la construction multi-ligne comme :</p>
+<pre><code class="language-python">ma_liste = [
     1, 2, 3,
     4, 5, 6,
 ]
-result = some_function_that_takes_arguments(
+result = une_fonction_qui_prends_des_arguments(
     &#39;a&#39;, &#39;b&#39;, &#39;c&#39;,
     &#39;d&#39;, &#39;e&#39;, &#39;f&#39;,
 )</code></pre>
 
 
-<h2 id="tabs-or-spaces">Tabs or Spaces?</h2>
+<h2 id="tabs-or-spaces">Tabs ou espaces?</h2>
 
-<p>Spaces are the preferred indentation method.</p>
+<p>Les espaces sont la méthode d'indentation privilégiée.</p>
 
-<p>Tabs should be used solely to remain consistent with code that is already indented with tabs.</p>
+<p>Les tabs doivent seument etre utilisées pour rester consistant avec un code qui a déjà été indenté avec des tabs.</p>
 
-<p>Python 3 disallows mixing the use of tabs and spaces for indentation.</p>
+<p>Python 3 interdit le mélange de l'utilisations des tabs et dess espaces pour l'indentation</p>
 
-<p>Python 2 code indented with a mixture of tabs and spaces should be converted to using spaces exclusively.</p>
+<p>Le code Python 2 indenté avec un mélange d'espces et de tabs doit être converti pour utiliser exclusivement des espaces</p>
 
-<p>When invoking the Python 2 command line interpreter with the <code>-t</code> option, it issues warnings about code that illegally mixes tabs and spaces. When using <code>-tt</code> these warnings become errors. These options are highly recommended!</p>
+<p>Quand l'interpreteur Python 2 est appelé en ligne de commande avec l'option <code>-t</code>, il emmet des avertissements quand un code utilise illégalement un mélange de tabs et d'espaces. En utilisant <code>-tt</code> ces avertisement deviennent des erreurs. Ces options sont forcement recommandées !</p>
 
 
-<h2 id="maximum-line-length">Maximum Line Length</h2>
+<h2 id="maximum-line-length">Longueur maximale de ligne</h2>
 
 <p>Limit all lines to a maximum of 79 characters.</p>
 
