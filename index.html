@@ -4,8 +4,8 @@
 
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>PEP 8: The Style Guide for Python Code</title>
+  <meta charset="utf-8" lang="fr-fr">
+  <title>PEP 8: Le Guide de Style pour le Code Python</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -185,9 +185,9 @@ ul > li {
   <div class="container">
 
     <div class="row" style="margin-top: 15%">
-        <h1 class="title">PEP 8 — the Style Guide for Python Code</h1>
+        <h1 class="title">PEP 8 — le Guide de Style pour le Code Python</h1>
         <div class="twelve columns">
-        <p class="awesome">This stylized presentation of the well-established <a href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a> was created by <a href="http://kennethreitz.org/bitcoin">Kenneth Reitz</a> (for humans).</p>
+        <p class="awesome">Cette présentation restylisée de la très établie <a href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a> a été créee par <a href="http://kennethreitz.org/bitcoin">Kenneth Reitz</a> et traduite par Kainushi (pour les humains francophones).</p>
         </div>
     </div>
 
@@ -200,26 +200,26 @@ ul > li {
 
 <h1 id="introduction">Introduction</h1>
 
-<p>This document gives coding conventions for the Python code comprising the standard library in the main Python distribution. Please see the companion informational PEP describing style guidelines for the C code in the C implementation of Python <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>Ce document donne les conventions de programmation pour Python comprenant la librairie standard de la distribution principale de Python. Merci de vous référer à la PEP accompagnant décrivant les prescriptions pour le code C dans l'implémentation C de Python <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
 
-<p>This document and <a href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a> (Docstring Conventions) were adapted from Guido’s original Python Style Guide essay, with some additions from Barry’s style guide <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
+<p>Ce document et <a href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a> (Conventions Docstrings) ont été adaptées de l'essai original de Guido Python Style Guide, avec quelques ajouts du guide de style de Barry <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
 
-<p>This style guide evolves over time as additional conventions are identified and past conventions are rendered obsolete by changes in the language itself.</p>
+<p>Ce guide évolue dans le temps quand des conventions additionnelles sont repérées et des conventions passées sont rendues obselètes par des changements dans le langage lui même.</p>
 
-<p>Many projects have their own coding style guidelines. In the event of any conflicts, such project-specific guides take precedence for that project.</p>
+<p>Beaucoup de projets ont leurs propres conventions de codage. En cas de conflit, le guide spécifique prends le pas sur ce projet.</p>
 
 
-<h1 id="a-foolish-consistency-is-the-hobgoblin-of-little-minds">A Foolish Consistency is the Hobgoblin of Little Minds</h1>
+<h1 id="a-foolish-consistency-is-the-hobgoblin-of-little-minds">Une Constance Idiote est le Diablotin des Simples d'Esprit</h1>
 
-<p>One of Guido’s key insights is that code is read much more often than it is written. The guidelines provided here are intended to improve the readability of code and make it consistent across the wide spectrum of Python code. As <a href="https://www.python.org/dev/peps/pep-0020/">PEP 20</a> says, “Readability counts”.</p>
+<p>Une des observations clé de Guide est que le code est lu bien plus souvent qu'il n'est écrit. Les conventions fournies ici sont destinées à améliorer la lisibilité du code et le rendre consistent par delà un large spectre de code Python. Comme dit la <a href="https://www.python.org/dev/peps/pep-0020/">PEP 20</a>, « La lisibilité compte ».</p>
 
-<p>A style guide is about consistency. Consistency with this style guide is important. Consistency within a project is more important. Consistency within one module or function is the most important.</p>
+<p>Un guide de style est à propos de la constance. La constance avec de guide est importante. La constance au sein des projets l'est encore plus. La constance dans un module ou une fonction est la plus importante.</p>
 
-<p>However, know when to be inconsistent&mdash;sometimes style guide recommendations just aren't applicable. When in doubt, use your best judgment. Look at other examples and decide what looks best. And don’t hesitate to ask!</p>
+<p>Malgré tout, sachez quand être inconstant&mdash;Quelquefois les recommandations du guide de style ne sont juste pas applicable. Dans le doute, utilisez votre meilleur jugement. Regardez à d'autres exemples et décidez de ce qui est le plus joli. Et n'hésitez pas à poser la question !</p>
 
-<p>In particular: do not break backwards compatibility just to comply with this PEP!</p>
+<p>En tout cas : ne cassez pas la rétro-compatabilité juste pour appliquer cette PEP !</p>
 
-<p>Some other good reasons to ignore a particular guideline:</p>
+<p>Quelques autres bonnes raisons d'ignorer une prescription :</p>
 
 <div class="row">
 <div class="one column">&nbsp;</div>
@@ -227,10 +227,10 @@ ul > li {
 
 <ol style="list-style-type: decimal">
 
-    <li>When applying the guideline would make the code less readable, even for someone who is used to reading code that follows this PEP.</li>
-    <li>To be consistent with surrounding code that also breaks it (maybe for historic reasons) – although this is also an opportunity to clean up someone else’s mess (in true XP style).</li>
-    <li>Because the code in question predates the introduction of the guideline and there is no other reason to be modifying that code.</li>
-    <li>When the code needs to remain compatible with older versions of Python that don’t support the feature recommended by the style guide.</li>
+    <li>Quand en appliquant la recommendation rend le code moins lisible, même pour quelqu'un qui est habitué à lire du code qui respecte cette PEP.</li>
+    <li>Pour être conforme au code l'entourrant qui ne la suis pas (Peut-être pour des raisons historiques) - Cependant, c'est aussi une opportunité pour nettoyer le fouillis de quelqu'un d'autre (dans le vrai style XP).</li>
+    <li>Parce que le code en question précède l'introduction de ces recommandations et qu'il n'y a aucune autre raisons de modifier ce code.</li>
+    <li>Quand le code doit rester compatible avec de plus vieilles versions de Python qui ne supportent pas les fonctionnalités recommandées par le guide de style.</li>
 </ol>
 
 </div>
