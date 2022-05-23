@@ -343,76 +343,76 @@ result = une_fonction_qui_prends_des_arguments(
 <p>Quand l'interpreteur Python 2 est appelé en ligne de commande avec l'option <code>-t</code>, il emmet des avertissements quand un code utilise illégalement un mélange de tabs et d'espaces. En utilisant <code>-tt</code> ces avertisement deviennent des erreurs. Ces options sont forcement recommandées !</p>
 
 
-<h2 id="maximum-line-length">Longueur maximale de ligne</h2>
+<h2 id="maximum-line-length">Taille de ligne maximum</h2>
 
-<p>Limit all lines to a maximum of 79 characters.</p>
+<p>Limitez toutes les lignes à 79 caractères.</p>
 
-<p>For flowing long blocks of text with fewer structural restrictions (docstrings or comments), the line length should be limited to 72 characters.</p>
+<p>Pour les longs blocs de texte avec moins de restriuction structurelle (doctrings ou commentaires), la longueur de la ligne doit petre limitée à 72 caractères.</p>
 
-<p>Limiting the required editor window width makes it possible to have several files open side-by-side, and works well when using code review tools that present the two versions in adjacent columns.</p>
+<p>Limiter la largeur requise dans la fenêtre de l'éditeur permet d'avoir plusieurs fichiers ouverts l'un à coté de l'autren et fonctionne bien en utilisant des outils de revision de code qui présentent les deux versions dans des colones adjacentes.</p>
 
-<p>The default wrapping in most tools disrupts the visual structure of the code, making it more difficult to understand. The limits are chosen to avoid wrapping in editors with the window width set to 80, even if the tool places a marker glyph in the final column when wrapping lines. Some web based tools may not offer dynamic line wrapping at all.</p>
+<p>Le retour à la ligne par defaut de la plus part des outils perturbe la structure vusuelle du code, le rendant plus difficile à comprendre. La limite a été choisie pour éviter le saut de ligne automatique des éditeur avec une largeur définie à 80 caractères, même si l'outil place un caractère non-imprimable de saut de ligne à la fin. Certains outils web peuvent ne pas offrir dutout ce type de retour à la ligne.</p>
 
-<p>Some teams strongly prefer a longer line length. For code maintained exclusively or primarily by a team that can reach agreement on this issue, it is okay to increase the line length limit up to 99 characters, provided that comments and docstrings are still wrapped at 72 characters.</p>
+<p>Certains équipes préfèrent ardement une plus grande longueur de ligne. Pour le code maintenu exclusivement ou principalement par une équipe qui s'est accodée sur ce point, il est possible d'augmenter cette limite à 99, tant que les commentaires et docstrings restent limités à 72 caractères.</p>
 
-<p>The Python standard library is conservative and requires limiting lines to 79 characters (and docstrings/comments to 72).</p>
+<p>La librairies standard de Python est conservatrice et demande une limite des lignes à 79 caractères (et 72 pour les docstrings et commentaires).</p>
 
-<p>The preferred way of wrapping long lines is by using Python’s implied line continuation inside parentheses, brackets and braces. Long lines can be broken over multiple lines by wrapping expressions in parentheses. These should be used in preference to using a backslash for line continuation.</p>
+<p>la methode préférée de découpage des longues lignes est d'utiliser la continuation de ligne implicite de Python dans les parenthèes, crochets et acollades. Les grandes lignes peuvent être découpées sur plusieurs lignes en entourant l'expression de parenthèses. Elles doivent être préférées à l'antislash pour la cesure.</p>
 
-<p>Backslashes may still be appropriate at times. For example, long, multiple <code>with</code>-statements cannot use implicit continuation, so backslashes are acceptable:</p>
+<p>Les anti-slash peuvent être utilisés au moment opportun. Par exemple, une longue instruction <code>with</code> ne peut pas utiliser la continuation de lignee implicite, donc les antishas sont acceptables:</p>
 
-<pre><code class="language-python">with open(&#39;/path/to/some/file/you/want/to/read&#39;) as file_1, \
-     open(&#39;/path/to/some/file/being/written&#39;, &#39;w&#39;) as file_2:
+<pre><code class="language-python">with open(&#39;/chemin/vers/un/fichies/que/vous/voulez/vraiment/lire&#39;) as fichier_1, \
+     open(&#39;/chemin/vers/un/fichies/que/vous/voulez/vraiment/lire&#39;, &#39;w&#39;) as fichier_2:
     file_2.write(file_1.read())</code></pre>
 
-<p>(See the previous discussion on <a href="#if-statements">multiline if-statements</a> for further thoughts on the indentation of such multiline <code>with</code>-statements.)</p>
+<p>(Voir la discussion précédente sur les <a href="#if-statements">instruction if multiligne</a> pour plus d'information sur ce genre d'indentation a appliquer avec l'instruction <code>with</code>.)</p>
 
-<p>Another such case is with <code>assert</code> statements.</p>
+<p>Un autre cas similaire avec l'instruction <code>assert</code>.</p>
 
-<p>Make sure to indent the continued line appropriately.</p>
+<p>Assurez-vous que l'indentation apres le retour à la ligne est correct.</p>
 
-<h2 id="break-before-or-after-binary-operator">Should a Line Break Before or After a Binary Operator?</h2>
+<h2 id="break-before-or-after-binary-operator">Un opérateur devrait-il être avant ou après le retour à la ligne ?</h2>
 
-<p class="no">For decades the recommended style was to break after binary operators. But this can hurt readability in two ways: the operators tend to get scattered across different columns on the screen, and each operator is moved away from its operand and onto the previous line. Here, the eye has to do extra work to tell which items are added and which are subtracted:</p>
+<p class="no">Pendant des décénies la recommandation était de couper la ligne après l'opérateur, mais cela peut rendre la lecture difficile de deux façons : Les opérateurs ont tendance à être éparpillés sur differentes colones de l'écran, et chaque opérateur est éloigné sur la ligne precedant son opérant. Dans ce cas l'oeil doit faire un effort supplémentaire pour voir quel element est ajouté et quel element est soustrait:</p>
 
-<pre><code class="language-python"># No: operators sit far away from their operands
-income = (gross_wages +
-          taxable_interest +
-          (dividends - qualified_dividends) -
-          ira_deduction -
-          student_loan_interest)
+<pre><code class="language-python"># Non: les opérateurs sont loins de leur operant.
+income = (Paie_brute +
+          interet_imposable +
+          (dividendes - dividendes_qualifiées) -
+          credit_dimpots -
+          interet_pret_etudiant)
 </code></pre>
 
-<p>To solve this readability problem, mathematicians and their publishers follow the opposite convention. Donald Knuth explains the traditional rule in his <em>Computers and Typesetting</em> series:</p>
+<p>Pour régler ce soucis de lisibilité, les mathématiciens et leurs éditeurs suivent la convention inverse. Donald Knuth explique la régle traditionnelle dans sa serie <em>Computers and Typesetting</em>:</p>
 
-<blockquote>“Although formulas within a paragraph always break after binary operations and relations, displayed formulas always break before binary operations” <a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>.</blockquote>
+<blockquote>“Bien que les formules au sein d'un paragraphe retourn à la ligne après un opérateur binaire et sa relation, l'affichage des formules retournent toujours à la ligne avant les opérations” <a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>.</blockquote>
 
-<p class="yes">Following the tradition from mathematics usually results in more readable code:</p>
+<p class="yes">Ne suivant la tradition des mathématique, il en résulte un code plus lisible :</p>
 
-<pre><code class="language-python"># Yes: easy to match operators with operands
-income = (gross_wages
-          + taxable_interest
-          + (dividends - qualified_dividends)
-          - ira_deduction
-          - student_loan_interest)
+<pre><code class="language-python"># Oui: Facile voir le lien entre operateurs et operants
+income = (Paie_brute
+          + interet_imposable
+          + (dividendes - dividendes_qualifiées)
+          - credit_dimpots
+          - interet_pret_etudiant)
 </code></pre>
 
-<p>In Python code, it is permissible to break before or after a binary operator, as long as the convention is consistent locally. For new code Knuth's style is suggested.</p>
+<p>En python il est permis de retourner à la ligne avant ou apres un opérateur, tant que la convetion est consistante localement. Pour du nouveau code le style de Knuth eest suggéré.</p>
 
-<h2 id="blank-lines">Blank Lines</h2>
+<h2 id="blank-lines">Lignes vide</h2>
 
-<p>Surround top-level function and class definitions with two blank lines.</p>
+<p>Entourez les fonction et classes racine de deux sauts de deux lignes vide.</p>
 
-<p>Method definitions inside a class are surrounded by a single blank line.</p>
+<p>Les methodes définies dans une classe sont entourée d'un seul espace.</p>
 
-<p>Extra blank lines may be used (sparingly) to separate groups of related functions. Blank lines may be omitted between a bunch of related one-liners (e.g. a set of dummy implementations).</p>
+<p>Des lignes blanches supplémentaires peuvent être (raisonnablement) utilisée pour séparer des grouppes de fonctions liées entre elles. Les lignes blanches peuvent être ommisent entre plusieurs fonction d'une ligne. (p.ex. un groupe d'implementation provisoire).</p>
 
-<p>Use blank lines in functions, sparingly, to indicate logical sections.</p>
+<p>Utilisez des lignes vides, sporadiquement, pour mettre en avant les sections logiques.</p>
 
-<p>Python accepts the control-L (i.e. ^L) form feed character as whitespace; Many tools treat these characters as page separators, so you may use them to separate pages of related sections of your file. Note, some editors and web-based code viewers may not recognize control-L as a form feed and will show another glyph in its place.</p>
+<p>Python accepte control-L (c.-⁠à-⁠d. ^L) comme un espace blanc; Beaucoup d'outils traitent ces caractères comme des séparateurs de pare, donc vous pouvez les utiliser pour séparer en pages les dofferentes sections de votre fichier. A noter, certains éditeurs et lecteurs de code web peuvent ne pas reconnaitre control-L comme de la mise en former et afficheront un autre glyph à sa place.</p>
 
 
-<h2 id="source-file-encoding">Source File Encoding</h2>
+<h2 id="source-file-encoding">Encodage de fichier source</h2>
 
 <p>Code in the core Python distribution should always use UTF-8 (or ASCII in Python 2).</p>
 
