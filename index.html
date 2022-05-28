@@ -414,85 +414,86 @@ income = (Paie_brute
 
 <h2 id="source-file-encoding">Encodage de fichier source</h2>
 
-<p>Code in the core Python distribution should always use UTF-8 (or ASCII in Python 2).</p>
+<p>Le code dans le coeur de la distibution de python3 utilise toujours UTF8.</p>
 
-<p>Files using ASCII (in Python 2) or UTF-8 (in Python 3) should not have an encoding declaration.</p>
+<p>Les fichier utilisant l'encodage UTF-8 (in Python 3) (ou ASCII en Python 2) ne doivent pas avoir de déplaration d'encodage.</p>
 
-<p>In the standard library, non-default encodings should be used only for test purposes or when a comment or docstring needs to mention an author name that contains non-ASCII characters; otherwise, using <code>\x</code>, <code>\u</code>, <code>\U</code>, or <code>\N</code> escapes is the preferred way to include non-ASCII data in string literals.</p>
+<p>Dans la librairie standard, les encodages differents de ceux par défaut ne doivent être utilisés qu'à des fins de test, ou quand un commentaire ou une docstring doit mentionner le nom d'un auteur qui n'est pas supporté par l'encodage par défaut. (Dans le cas de python2, les caractères échappés <code>\x</code>, <code>\u</code>, <code>\U</code>, ou <code>\N</code> sont la manière à préfarer pour ajouter des caractères non ASCII.</p>
 
-<p>For Python 3.0 and beyond, the following policy is prescribed for the standard library (see <a href="https://www.python.org/dev/peps/pep-3131">PEP 3131</a>): All identifiers in the Python standard library MUST use ASCII-only identifiers, and SHOULD use English words wherever feasible (in many cases, abbreviations and technical terms are used which aren’t English). In addition, string literals and comments must also be in ASCII. The only exceptions are (a) test cases testing the non-ASCII features, and (b) names of authors. Authors whose names are not based on the Latin alphabet (latin-1, ISO/IEC 8859-1 character set) MUST provide a transliteration of their names in this character set.</p>
+<p>Pour python 3.0 et après, suivez les prescriptions pour la librairie Standard (voir <a href="https://www.python.org/dev/peps/pep-3131">PEP 3131</a>) : Tous les identifiants dans la librairie standard de Python DOIVENT utiliser seulement des caractères ASCII pour les identifiants, et DOIVENT utiliser des mots anglais lorsque c'est possible. (Dans bien des cas, des abbreviations et termes techniques sont utilisés et ne sont pas anglais). De plus, les chaines de caractère et commentaires doivent eux aussi etre en ASCII. Les seules exceptions sont (a) Les tests concernant des fonctionnalités non-ASCII, et (b) le nom des auteurs. Les auteurs ayant un nom qui n'est pas basé sur l'alphaber latin (latin-1, jeu de caractère ISO/IEC 8859-1) DOIVENT fournir une transcription de leur nom dans ce jeu de caractère.</p>
 
-<p>Open source projects with a global audience are encouraged to adopt a similar policy.</p>
+<p>Les projets Open source avec une audience internationale sont encouragés à adopter une politique similaire.</p>
 
 
 <h2 id="imports">Imports</h2>
 
 <ul>
 
-<li><p>Imports should usually be on separate lines</p>
+<li><p>Les imports doivent normalement être sur des lignes individuelles</p>
 
-<p class="yes"><span>Yes:</span></p>
+<p class="yes"><span>Oui :</span></p>
 <pre><code class="language-python">import os
 import sys</code></pre>
 
-<p class="no"><span>No:</span></p>
+<p class="no"><span>Non :</span></p>
 <pre><code class="language-python">import os, sys</code></pre>
 
-<p>It’s okay to say this though:</p>
+<p>cependant, il est valide d'écrire ca :</p>
 
 <pre><code class="language-python">from subprocess import Popen, PIPE</code></pre></li>
 
-<li><p>Imports are always put at the top of the file, just after any module comments and docstrings, and before module globals and constants.</p>
+<li><p>Les imports sont toujours mis en haut du fichier, apres les commentaires et docstrings du module, mais avant les constantes et variables globales du module.</p>
 
-<p>Imports should be grouped in the following order:</p>
+<p>Les imports doivent être groupés dans cet ordre:</p>
 
 <ol style="list-style-type: decimal">
-<li>Standard library imports</li>
-<li>Related third party imports</li>
-<li>Local application/library specific imports</li>
+<li>Imports de la librairie standard</li>
+<li>Imports externes</li>
+<li>Imports locaux/spécivique a l'application</li>
 </ol>
 
-<p>You should put a blank line between each group of imports.</p>
+<p>Vous devez mettre une ligne blanche entre chaque groupe d'imports.</p>
 
-<li><p>Absolute imports are recommended, as they are usually more readable and tend to be better behaved (or at least give better error messages) if the import system is incorrectly configured (such as when a directory inside a package ends up on <code>sys.path</code>):</p>
+<li><p>Les imports absolu sont recommandés, étant donné qu'ils sont plus lisibles et se comportent mieux (ou du moins ils donnent de meilleurs messages d'erreur) si le systeme d'import est mal configuré (comme quand un repertoire se retrouve dans un
+    <code>sys.path</code>):</p>
 
-<pre><code class="language-python">import mypkg.sibling
-from mypkg import sibling
-from mypkg.sibling import example</code></pre>
+<pre><code class="language-python">import monpkg.voisin
+from monpkg import voisin
+from monpkg.voisin import exemple</code></pre>
 
-<p>However, explicit relative imports are an acceptable alternative to absolute imports, especially when dealing with complex package layouts where using absolute imports would be unnecessarily verbose:</p>
+<p>Cependant, les imports relatifs explicites sont une alternative acceptable aux imports absoluts, spécialement quand vous avez à faire a des packages avec des arborescences complexes où utiliser des imports absolus serait trop verbeux :</p>
 
-<pre><code class="language-python">from . import sibling
-from .sibling import example</code></pre>
+<pre><code class="language-python">from . import voisin
+from .voisin import exemple</code></pre>
 
-<p>Standard library code should avoid complex package layouts and always use absolute imports.</p>
+<p>La librairie standard doit eviter les arborescences complexe dans ses packages et toujours utiliser des imports absolus.</p>
 
-<p>Implicit relative imports should <em>never</em> be used and have been removed in Python 3.</p></li>
+<p>Les imports implicites ne doivent <em>jamais</em> être utilisés et ont été retirés de Python 3.</p></li>
 
-<li><p>When importing a class from a class-containing module, it’s usually okay to spell this:</p>
+<li><p>Quand vous importez une classe d'un module, il est acceptable d'écrire ceci :</p>
 
-<pre><code class="language-python">from myclass import MyClass
-from foo.bar.yourclass import YourClass</code></pre>
+<pre><code class="language-python">from Maclasse import MaClasse
+from foo.bar.votreclasse import VotreClasse</code></pre>
 
-<p>If this spelling causes local name clashes, then spell them explicitly :</p>
+<p>Si les noms causent une collision, alors appellez-les explicitement :</p>
 
-<pre><code class="language-python">import myclass
-import foo.bar.yourclass</code></pre>
+<pre><code class="language-python">import maclass
+import foo.bar.votreclass</code></pre>
 
-<p>and use <code>myclass.MyClass</code> and <code>foo.bar.yourclass.YourClass</code>.</p></li>
+<p>et utilisez <code>maclass.MaClass</code> et <code>foo.bar.votreclass.VotreClass</code>.</p></li>
 
-<li><p>Wildcard imports (<code>from &lt;module&gt; import *</code>) should be avoided, as they make it unclear which names are present in the namespace, confusing both readers and many automated tools. There is one defensible use case for a wildcard import, which is to republish an internal interface as part of a public API (for example, overwriting a pure Python implementation of an interface with the definitions from an optional accelerator module and exactly which definitions will be overwritten isn’t known in advance).</p>
+<li><p>les imports jocker (<code>from &lt;module&gt; import *</code>) doivent être évités vu qu'ils rendent peu clair quels noms sont présent dans l'espace de nom, perturbant les lecteurs et les outils automatisés. Ill y un un cas ou les imports jocker sont une utilisation acceptable, pour republier une interface interne en API publique (Par exemple, écraser une implémentation Python en definissant un module accelerateur, sans pour autant savoir à l'avance quelles definitions vont être écrasées).</p>
 
-<p>When republishing names this way, the guidelines below regarding public and internal interfaces still apply.</p></li>
+<p>Quand des noms sont repupliés comme cela, les regles concernant les interfaces publiques et privées s'appliquent.</p></li>
 </ul>
 
-<h2 id="module-level-dunder-names">Module Level Dunder Names</h2>
+<h2 id="module-level-dunder-names">Dunder Names de module</h2>
 
-<p>Module level "dunders" (i.e. names with two leading and two trailing underscores) such as <code>__all__</code>, <code>__author__</code>, <code>__version__</code>, etc. should be placed after the module docstring but before any import statements <em>except</em> <code>from __future__</code> imports. Python mandates that future-imports must appear in the module before any other code except docstrings.</p>
+<p>Les "dunders" (i.e. Nom avec deux underscore avant et après) de module comme <code>__all__</code>, <code>__author__</code>, <code>__version__</code>, etc. doivent être placés apres les commentaires de module mais avant les definitions d'imports <em>except</em> <code>from __future__</code>. Python prévoit que les imports-futur doivent être avant tout autre code à l'exceptions des commentaires et docstrings.</p>
 
-<pre><code class="language-python">"""This is the example module.
+<pre><code class="language-python">"""Un exemple acceptable
 
-This module does stuff.
+Ce module fait des trucs.
 """
 
 from __future__ import barry_as_FLUFL
@@ -505,7 +506,7 @@ import os
 import sys
 </code></pre>
 
-<h1 id="string-quotes">String Quotes</h1>
+<h1 id="string-quotes">Guillmets de strings</h1>
 
 
 <p>In Python, single-quoted strings and double-quoted strings are the same. This PEP does not make a recommendation for this. Pick a rule and stick to it. When a string contains single or double quote characters, however, use the other one to avoid backslashes in the string. It improves readability.</p>
